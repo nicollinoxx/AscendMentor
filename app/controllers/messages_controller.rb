@@ -1,9 +1,10 @@
 class MessagesController < ApplicationController
+  before_action :set_chat
   before_action :set_message, only: %i[ show edit update destroy ]
 
   # GET /messages
   def index
-    @messages = Message.all
+    @messages = @chat.messages
   end
 
   # GET /messages/1
@@ -12,7 +13,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
+    @message = @chat.messages.build
   end
 
   # GET /messages/1/edit
@@ -21,10 +22,10 @@ class MessagesController < ApplicationController
 
   # POST /messages
   def create
-    @message = Message.new(message_params)
+    @message = @chat.messages.build(message_params)
 
     if @message.save
-      redirect_to @message, notice: "Message was successfully created."
+      redirect_to chat_message_url(@chat, @message), notice: "Message was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +34,7 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)
-      redirect_to @message, notice: "Message was successfully updated.", status: :see_other
+      redirect_to chat_message_url(@chat, @message), notice: "Message was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,13 +43,17 @@ class MessagesController < ApplicationController
   # DELETE /messages/1
   def destroy
     @message.destroy!
-    redirect_to messages_path, notice: "Message was successfully destroyed.", status: :see_other
+    redirect_to chat_messages_url(@chat), notice: "Message was successfully destroyed.", status: :see_other
   end
 
   private
+    def set_chat
+      @chat = Chat.find(params[:chat_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_message
-      @message = Message.find(params.expect(:id))
+      @message = @chat.messages.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
