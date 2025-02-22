@@ -11,6 +11,8 @@
   </div>
 
   <div id="messages" class="min-w-full space-y-5">
+    <%= turbo_stream_from @chat %>
+    
     <% if @messages.any? %>
       <% @messages.each do |message| %>
         <div class="flex justify-between items-center">

@@ -25,6 +25,7 @@ class MessagesController < ApplicationController
     @message = @chat.messages.build(message_params)
 
     if @message.save
+      @message.broadcast_append_later_to(@chat, target: 'messages', partial: 'messages/message')
       redirect_to chat_message_url(@chat, @message), notice: "Message was successfully created."
     else
       render :new, status: :unprocessable_entity
