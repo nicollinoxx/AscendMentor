@@ -7,27 +7,26 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Messages</h1>
-    <%= link_to "New message", new_chat_message_path(@chat, @message), class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
   <div id="messages" class="min-w-full space-y-5">
     <%= turbo_stream_from @chat %>
-    
-    <% if @messages.any? %>
-      <% @messages.each do |message| %>
-        <div class="flex justify-between items-center">
-          <%= render message %>
-          <div class="space-x-2">
-            <%= link_to "Show", chat_message_path(@chat, message), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_chat_message_path(@chat, message), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <div class="inline-block">
-              <%= button_to "Destroy", chat_message_path(@chat, message), method: :delete, class: "rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-            </div>
+
+    <% @messages.each do |message| %>
+      <div class="flex justify-between items-center">
+        <%= render message %>
+        <div class="space-x-2">
+          <%= link_to "Show", chat_message_path(@chat, message), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+          <%= link_to "Edit", edit_chat_message_path(@chat, message), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+          <div class="inline-block">
+            <%= button_to "Destroy", chat_message_path(@chat, message), method: :delete, class: "rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
           </div>
         </div>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No messages found.</p>
+      </div>
     <% end %>
+  </div>
+
+  <div id="form">
+    <%= render 'form', { chat: @chat, message: @chat.messages.build } %>
   </div>
 </div>
