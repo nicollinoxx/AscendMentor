@@ -17,7 +17,7 @@ class ChatsTest < ApplicationSystemTestCase
     fill_in "Title", with: @chat.title
     click_on "Create Chat"
 
-    assert_text "Chat was successfully created"
+    assert_text "Chat was successfully created."
     click_on "Back"
   end
 
@@ -28,14 +28,15 @@ class ChatsTest < ApplicationSystemTestCase
     fill_in "Title", with: @chat.title
     click_on "Update Chat"
 
-    assert_text "Chat was successfully updated"
+    assert_text "Chat was successfully updated."
     click_on "Back"
   end
 
   test "should destroy Chat" do
     visit chat_url(@chat)
     click_on "Destroy this chat", match: :first
+    accept_alert "Are you sure?"
 
-    assert_text "Chat was successfully destroyed"
+    assert_text "Chat was successfully destroyed."
   end
 end
