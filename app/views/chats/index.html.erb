@@ -16,6 +16,7 @@
         <div class="flex justify-between items-center">
           <%= render chat %>
           <div class="space-x-2">
+            <%= link_to "Show messages", chat_messages_path(chat), class: "rounded-md px-3.5 py-2.5 bg-yellow-100 hover:bg-yellow-50 inline-block font-medium" %>
             <%= link_to "Show", chat, class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
             <%= link_to "Edit", edit_chat_path(chat), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
             <div class="inline-block">
