@@ -13,10 +13,10 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create message" do
     assert_difference("Message.count") do
-      post chat_messages_url(@chat), params: { message: { chat_id: @chat.id, content: @message.content } }, as: :turbo_stream
+      post chat_messages_url(@chat), params: { message: { chat_id: @chat.id, content: @message.content } }
     end
 
-    assert_response :success
+    assert_redirected_to chat_messages_url(@chat)
   end
 
   test "should get edit" do

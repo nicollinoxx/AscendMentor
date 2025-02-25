@@ -7,6 +7,10 @@ class MessagesController < ApplicationController
     @messages = @chat.messages
   end
 
+  def new
+    @message = @chat.messages.build
+  end
+
   # GET /messages/1/edit
   def edit
   end
@@ -15,37 +19,36 @@ class MessagesController < ApplicationController
   def create
     @message = @chat.messages.build(message_params)
 
-    respond_to do |format|
-      if @message.save
-        @message.broadcast_append_later_to(@chat, target: "messages", partial: "messages/message")
+    if @message.save
+      @message.broadcast_append_later_to(@chat, target: "messages", partial: "messages/message", locals: { chat: @chat, message: @message })
 
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.update("form",
-                      partial: "messages/form", locals: { chat: @chat,
-                      message: @chat.messages.build })
-        }
-      else
-        render :index, status: :unprocessable_entity
-      end
+      redirect_to chat_messages_url(@chat)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)
-      redirect_to chat_messages_url(@chat), notice: "Message was successfully updated.", status: :see_other
+      @message.broadcast_replace_later_to(@chat, target: "message_#{@message.id}", partial: "messages/message", locals: { chat: @chat, message: @message })
+
+      redirect_to chat_messages_url(@chat)
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity, status: :see_other
     end
   end
 
   # DELETE /messages/1
   def destroy
     @message.destroy!
+    @message.broadcast_remove_to(@chat, target: "message_#{@message.id}")
+
     redirect_to chat_messages_url(@chat), notice: "Message was successfully destroyed.", status: :see_other
   end
 
   private
+
     def set_chat
       @chat = Chat.find(params[:chat_id])
     end

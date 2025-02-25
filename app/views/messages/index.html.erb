@@ -1,32 +1,25 @@
 <% content_for :title, "Messages" %>
 
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Messages</h1>
+    <h1 class="font-bold text-4xl mb-3">Messages</h1>
   </div>
 
-  <div id="messages" class="min-w-full space-y-5">
+  <div id="messages" class="min-w-50">
     <%= turbo_stream_from @chat %>
 
     <% @messages.each do |message| %>
-      <div class="flex justify-between items-center">
-        <%= render message %>
-        <div class="space-x-2">
-          <%= link_to "Show", chat_message_path(@chat, message), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-          <%= link_to "Edit", edit_chat_message_path(@chat, message), class: "rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-          <div class="inline-block">
-            <%= button_to "Destroy", chat_message_path(@chat, message), method: :delete, class: "rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      </div>
+      <%= render message, chat: @chat %>
     <% end %>
   </div>
 
-  <div id="form">
-    <%= render 'form', { chat: @chat, message: @chat.messages.build } %>
+  <div class="pb-12 sticky bottom-0">
+    <%= turbo_frame_tag "new_message" do %>
+      <% if notice.present? %>
+        <p class="py-2 px-3 text-sm bg-green-50 my-1 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+      <% end %>
+
+      <%= render "form", { message: @chat.messages.build } %>
+    <% end %>
   </div>
 </div>
