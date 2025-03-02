@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
     @message = @chat.messages.build(message_params)
 
     if @message.save
-      @message.broadcast_append_later_to(@chat, target: "messages", partial: "messages/message", locals: { chat: @chat, message: @message })
+      @message.broadcast_append_to(@chat, target: "messages", partial: "messages/message", locals: { chat: @chat, message: @message })
 
       redirect_to chat_messages_url(@chat)
     else
@@ -31,7 +31,7 @@ class MessagesController < ApplicationController
   # PATCH/PUT /messages/1
   def update
     if @message.update(message_params)
-      @message.broadcast_replace_later_to(@chat, target: "message_#{@message.id}", partial: "messages/message", locals: { chat: @chat, message: @message })
+      @message.broadcast_replace_to(@chat, target: "message_#{@message.id}", partial: "messages/message", locals: { chat: @chat, message: @message })
 
       redirect_to chat_messages_url(@chat)
     else
