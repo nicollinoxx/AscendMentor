@@ -1,11 +1,11 @@
 <% content_for :title, "Messages" %>
 
-<div class="w-full mb-20"   data-controller='scroll'>
+<div class="w-full" data-controller='scroll'>
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl mb-3">Messages</h1>
   </div>
 
-  <div id="messages" class="min-w-50">
+  <div id="messages">
     <%= turbo_stream_from @chat %>
 
     <% @messages.each do |message| %>
@@ -13,18 +13,23 @@
     <% end %>
   </div>
 
-  <div class="sticky bottom-0">
-    <button data-scroll-target="scrollButton" data-action="click->scroll#scrollToEnd" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg">
-      Go to End
-    </button>
+  <div class="sticky bottom-0 pb-6">
 
+    <div class="mb-3">
+      <%= turbo_frame_tag "new_message" do %>
+        <% if notice.present? %>
+          <p class="py-2 px-3 text-sm bg-green-50 my-1 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+        <% end %>
 
-    <%= turbo_frame_tag "new_message" do %>
-      <% if notice.present? %>
-        <p class="py-2 px-3 text-sm bg-green-50 my-1 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+        <%= render "form", { message: @chat.messages.build } %>
       <% end %>
+    </div>
 
-      <%= render "form", { message: @chat.messages.build } %>
-    <% end %>
+    <div class="flex space-x-3 mb-5">
+      <%= link_to 'Back to chats', chats_path %>
+      <button data-scroll-target="scrollButton" data-action="click->scroll#scrollToEnd" class="font-bold text-yellow-600">
+        Go to End
+      </button>
+    </div>
   </div>
 </div>

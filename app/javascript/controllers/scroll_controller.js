@@ -19,7 +19,7 @@ export default class extends Controller {
   }
 
   isAtBottom() {
-    return window.innerHeight + window.scrollY >= document.body.scrollHeight;
+    return window.innerHeight + window.scrollY >= document.body.scrollHeight - 200;
   }
 
   isScrollButtonVisible() {
