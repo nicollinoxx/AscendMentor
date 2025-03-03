@@ -10,7 +10,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       start_new_session_for @user
-      redirect_to root_url, notice: 'Succefully created account'
+      redirect_to root_url, notice: "Succefully created account"
     else
       render :new, status: :unprocessable_entity
     end
