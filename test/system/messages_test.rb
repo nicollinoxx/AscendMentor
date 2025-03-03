@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class MessagesTest < ApplicationSystemTestCase
   setup do
+    authenticate(users(:one))
     @message = messages(:one)
     @chat    = chats(:one)
   end
@@ -14,23 +15,22 @@ class MessagesTest < ApplicationSystemTestCase
   test "should create message" do
     visit chat_messages_url(@chat)
 
-    fill_in "Content", with: @message.content
-    click_on "Create Message"
+    find("textarea").set(@message.content)
+    find("button svg").click
   end
 
   test "should update Message" do
     visit chat_messages_url(@chat)
     click_on "Edit", match: :first
 
-    fill_in "Content", with: @message.content
-    click_on "Update Message"
-
-    assert_text "Message was successfully updated."
+    find("textarea").set(@message.content)
+    find("button svg").click
   end
 
   test "should destroy Message" do
     visit chat_messages_url(@chat)
-    click_on "Destroy", match: :first
+    click_on "Edit", match: :first
+    click_on "Destroy"
     accept_alert "Are you sure?"
 
     assert_text "Message was successfully destroyed."

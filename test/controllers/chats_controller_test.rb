@@ -2,6 +2,7 @@ require "test_helper"
 
 class ChatsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    authenticate(users(:one))
     @chat = chats(:one)
   end
 

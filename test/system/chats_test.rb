@@ -2,6 +2,7 @@ require "application_system_test_case"
 
 class ChatsTest < ApplicationSystemTestCase
   setup do
+    authenticate(users(:one))
     @chat = chats(:one)
   end
 
@@ -18,7 +19,7 @@ class ChatsTest < ApplicationSystemTestCase
     click_on "Create Chat"
 
     assert_text "Chat was successfully created."
-    click_on "Back"
+    click_on "Back to chats"
   end
 
   test "should update Chat" do
@@ -29,12 +30,12 @@ class ChatsTest < ApplicationSystemTestCase
     click_on "Update Chat"
 
     assert_text "Chat was successfully updated."
-    click_on "Back"
+    click_on "Back to chats"
   end
 
   test "should destroy Chat" do
     visit chat_url(@chat)
-    click_on "Destroy this chat", match: :first
+    click_on "Destroy", match: :first
     accept_alert "Are you sure?"
 
     assert_text "Chat was successfully destroyed."
