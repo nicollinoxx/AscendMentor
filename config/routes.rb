@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resource :session
+  resources :registrations, only: %i[ new create ]
+  resource  :session
   resources :passwords, param: :token
   resources :chats do
     resources :messages, except: %i[ new show ]
