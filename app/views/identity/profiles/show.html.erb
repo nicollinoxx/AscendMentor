@@ -1,0 +1,25 @@
+<% content_for :title, "Profile" %>
+
+<div>
+  <% if notice.present? %>
+    <p class="py-2 px-3 text-sm bg-green-50 my-1 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl mb-3">Profile</h1>
+  </div>
+
+  <div class="my-8">
+    <h2 class="text-2xl mb-3"><%= @user.name %></h2>
+    <p>
+      <strong>Email: </strong> <%= @user.email_address %>
+    </p>
+  </div>
+
+  <div class="space-x-4">
+    <%= link_to 'Edit profile', edit_identity_profile_path(@user.name), class: 'text-gray-700 underline hover:no-underline' %>
+
+    <%= link_to 'Sessions', sessions_path, class: 'text-gray-700 underline hover:no-underline' %>
+  </div>
+</div>

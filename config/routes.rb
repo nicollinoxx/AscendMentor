@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   resources :passwords, param: :token
 
+  namespace :identity do
+    resources :profiles, param: :name, only: [:index, :edit, :update, :show]
+  end
+
   resources :chats do
     resources :messages, except: %i[ new show ]
   end

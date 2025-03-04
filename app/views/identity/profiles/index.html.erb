@@ -1,0 +1,6 @@
+<% @user.each do |user| %>
+  <div>
+    <p><%= user.name %></p>
+    <%= link_to 'Show Profile', identity_profile_path(user.name) %>
+  </div>
+<% end %>
