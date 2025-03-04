@@ -3,7 +3,7 @@ module Authentication
 
   included do
     before_action :require_authentication
-    helper_method :authenticated?
+    helper_method :authenticated?, :is_owner?
   end
 
   class_methods do
@@ -48,5 +48,9 @@ module Authentication
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
+    end
+
+    def is_owner?
+      Current.user.name == params[:name]
     end
 end

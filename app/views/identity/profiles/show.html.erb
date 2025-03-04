@@ -17,9 +17,11 @@
     </p>
   </div>
 
-  <div class="space-x-4">
-    <%= link_to 'Edit profile', edit_identity_profile_path(@user.name), class: 'text-gray-700 underline hover:no-underline' %>
+  <% if is_owner? %>
+    <div class="space-x-4">
+      <%= link_to 'Edit profile', edit_identity_profile_path(@user.name), class: 'text-gray-700 underline hover:no-underline' %>
 
-    <%= link_to 'Sessions', sessions_path, class: 'text-gray-700 underline hover:no-underline' %>
-  </div>
+      <%= link_to 'Sessions', sessions_path, class: 'text-gray-700 underline hover:no-underline' %>
+    </div>
+  <% end %>
 </div>
