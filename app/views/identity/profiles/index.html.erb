@@ -1,6 +1,19 @@
-<% @user.each do |user| %>
-  <div>
-    <p><%= user.name %></p>
-    <%= link_to 'Show Profile', identity_profile_path(user.name) %>
+<% content_for :title, "Profiles" %>
+
+<div class="w-full">
+  <div class="mb-3">
+    <h1 class="font-bold text-4xl">Profiles</h1>
   </div>
-<% end %>
+
+  <div id="profiles" class="min-w-full divide-y divide-gray-200 space-y-5">
+    <% @user.each do |user| %>
+        <div class="flex justify-between items-center ">
+          <div class='my-2'>
+            <p class='font-medium mb-3'><%= user.name %></p>
+            <p>asdf asdfasdf asdfasd sadf</p>
+          </div>
+          <%= link_to 'Show Profile', identity_profile_path(user.name), class: 'rounded-md p-2 bg-gray-600 hover:bg-gray-500 text-white font-medium' %>
+        </div>
+    <% end %>
+  </div>
+</div>
