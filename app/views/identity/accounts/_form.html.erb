@@ -1,0 +1,23 @@
+<%= form_with(model: @user, url: identity_account_path) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul class="list-disc ml-6">
+        <% @user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: "Username", class: "block shadow-sm rounded-md border border-gray-200 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+    <div class="inline">
+      <%= form.submit "Update profile", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+    </div>
+  </div>
+<% end %>

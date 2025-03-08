@@ -9,7 +9,7 @@
         <div class="bg-gray-600 border-3 border-blue-600 object-cover rounded-full w-36 h-36 mx-auto"></div>
       <% end %>
 
-      <%= render partial: 'identity/shared/dropdown' %>
+      <%= render partial: 'identity/shared/dropdown' if params[:name].nil? %>
     </div>
 
     <div class="lg:text-left">

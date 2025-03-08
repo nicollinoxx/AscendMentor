@@ -6,7 +6,7 @@ class Identity::AvatarsController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to identity_profile_path(@user), notice: "Avatar was successfully updated."
+      redirect_to identity_account_path(@user), notice: "Avatar was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -15,7 +15,7 @@ class Identity::AvatarsController < ApplicationController
   def destroy
     @user.avatar.purge
 
-    redirect_to identity_profile_path(@user), notice: "Avatar was successfully destroyed"
+    redirect_to identity_account_path(@user), notice: "Avatar was successfully destroyed"
   end
 
   private

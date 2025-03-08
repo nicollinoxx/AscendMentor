@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   namespace :identity do
-    resources :profiles, param: :name, only: [:index, :edit, :update, :show]
+    resources :profiles, param: :name, only: [:index, :show]
+    resources :accounts, only: [:show, :edit, :update]
     resources :avatars, only: [:edit, :update, :destroy]
   end
 
