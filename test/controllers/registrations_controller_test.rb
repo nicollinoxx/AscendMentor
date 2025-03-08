@@ -13,7 +13,7 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
   test "Should register" do
     get new_registration_url
     assert_difference("User.count") do
-      post registrations_url, params: { user: { email_address: "another_email_address@example.com", password: "password", password_confirmation: "password" } }
+      post registrations_url, params: { user: { name: "Another_name", email_address: "another_email_address@example.com", password: "password", password_confirmation: "password" } }
     end
 
     assert_redirected_to root_url
