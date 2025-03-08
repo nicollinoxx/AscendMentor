@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   namespace :identity do
-    resources :profiles, param: :name, only: [:index, :show]
-    resources :accounts, only: [:show, :edit, :update]
-    resources :avatars, only: [:edit, :update, :destroy]
+    resources :profiles, param: :name, only: %i[ index show ]
+    resources :accounts, only: %i[ show edit update ]
+    resources :avatars,  only: %i[ edit update destroy ]
   end
 
   resources :chats do

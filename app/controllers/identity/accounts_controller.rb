@@ -9,7 +9,7 @@ class Identity::AccountsController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to identity_account_path(@user), notice: 'Profile was successfully updated.'
+      redirect_to identity_account_path(@user), notice: "Profile was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
