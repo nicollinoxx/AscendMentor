@@ -1,0 +1,18 @@
+<div class="absolute bottom-0 right-0 mb-4">
+  <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="text-white bg-blue-600 hover:bg-blue-400 focus:ring-2 focus:ring-blue-300 rounded-full p-2" type="button">
+    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+    </svg>
+  </button>
+
+  <div id="dropdownHover" class="z-10 hidden bg-white rounded-md shadow-md w-40 group-hover:block">
+    <ul class="text-sm divide-y divide-gray-100 mx-2" aria-labelledby="dropdownHoverButton">
+      <li>
+        <%= link_to 'Edit', edit_identity_avatar_path(@user), class: 'block px-4 py-2 text-center' %>
+      </li>
+      <li>
+        <%= button_to 'Destroy', identity_avatar_path(@user), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'block px-4 py-2 text-red-600 w-full' %>
+      </li>
+    </ul>
+  </div>
+</div>

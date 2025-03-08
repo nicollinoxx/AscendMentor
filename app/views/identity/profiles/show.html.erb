@@ -1,21 +1,13 @@
 <% content_for :title, "Profile" %>
 
-<div>
+<div class="w-full">
   <% if notice.present? %>
     <p class="py-2 px-3 text-sm bg-green-50 my-1 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
+  <h1 class="font-bold text-4xl mb-4">Profile</h1>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl mb-4">Profile</h1>
-  </div>
-
-  <div class="mb-5">
-    <h2 class="text-2xl mb-3"><%= @user.name %></h2>
-    <p>
-      <strong>Email: </strong> <%= @user.email_address %>
-    </p>
-  </div>
+  <%= render partial: "identity/shared/profile" %>
 
   <% if is_owner? %>
     <div class="space-x-4">

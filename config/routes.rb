@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   namespace :identity do
     resources :profiles, param: :name, only: [:index, :edit, :update, :show]
+    resources :avatars, only: [:edit, :update, :destroy]
   end
 
   resources :chats do
