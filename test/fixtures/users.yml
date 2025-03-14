@@ -6,5 +6,6 @@ one:
   password_digest: <%= password_digest %>
 
 two:
+  name: example1
   email_address: two@example.com
   password_digest: <%= password_digest %>

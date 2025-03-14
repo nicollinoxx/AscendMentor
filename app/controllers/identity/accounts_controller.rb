@@ -19,6 +19,6 @@ class Identity::AccountsController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name)
+      params.expect(user: [ :name ])
     end
 end
