@@ -1,6 +1,6 @@
 <div id="<%= dom_id message %>" class="my-2 max-w-[45rem]">
   <div class='inline-block'>
-    <div class="animation-message flex rounded-lg p-2 bg-slate-100">
+    <div class="animation-message flex rounded-lg p-2 bg-slate-100 dark:bg-slate-800">
       <p class=""><%= message.content %></p>
       <%= link_to 'Edit', edit_chat_message_path(chat, message), data: { turbo_frame: 'new_message' }, class: "mt-auto mt-1 ml-2 text-blue-600 text-xs" unless message.updated_at < 3.minutes.ago %>
     </div>

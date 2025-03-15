@@ -15,6 +15,14 @@
 
 
   <div class="sticky bottom-0 pb-6">
+    <div class="text-right mr-16">
+      <button data-scroll-target="scrollButton" data-action="click->scroll#scrollToEnd" class="font-bold bg-yellow-50 rounded-full text-yellow-600 p-2">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </button>
+    </div>
+
     <div class="mb-3">
       <%= turbo_frame_tag "new_message" do %>
         <% if notice.present? %>
@@ -23,13 +31,6 @@
 
         <%= render "form", { message: @chat.messages.build } %>
       <% end %>
-    </div>
-
-    <div class="flex space-x-3 mb-5">
-      <%= link_to 'Back to chats', chats_path %>
-      <button data-scroll-target="scrollButton" data-action="click->scroll#scrollToEnd" class="font-bold text-yellow-600">
-        Go to End
-      </button>
     </div>
   </div>
 </div>

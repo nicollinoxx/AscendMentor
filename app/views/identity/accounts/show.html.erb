@@ -2,7 +2,7 @@
 
 <div class="w-full">
   <% if notice.present? %>
-    <p class="py-2 px-3 text-sm bg-green-50 my-1 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <p class="py-2 px-3 mb-5 text-sm bg-green-50 dark:bg-white text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
   <div class="flex justify-between items-center">
@@ -12,5 +12,12 @@
 
   <%= render partial: "identity/shared/profile" %>
 
-  <%= link_to 'Sessions', sessions_path, class: 'text-gray-700 underline hover:no-underline' %>
+  <%= link_to 'Sessions', sessions_path, class: 'underline hover:no-underline' %>
+
+  <div class="flex items-center space-x-2 mt-8">
+    <p class="font-bold">Theme</p>
+    <button data-action="click->theme#toggle" data-theme-target="button" class="bg-gray-800 text-white dark:bg-white dark:text-black py-1 px-2 rounded">
+      Dark
+    </button>
+  </div>
 </div>

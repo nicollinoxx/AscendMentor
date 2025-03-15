@@ -8,7 +8,7 @@
   <div id="dropdownHover" class="z-10 hidden bg-white rounded-md shadow-md w-40 group-hover:block">
     <ul class="text-sm divide-y divide-gray-100 mx-2" aria-labelledby="dropdownHoverButton">
       <li>
-        <%= link_to 'Edit', edit_identity_avatar_path(@user), class: 'block px-4 py-2 text-center' %>
+        <%= link_to 'Edit', edit_identity_avatar_path(@user), class: 'text-black block px-4 py-2 text-center' %>
       </li>
       <li>
         <%= button_to 'Destroy', identity_avatar_path(@user), method: :delete, data: { turbo_confirm: 'Are you sure?' }, class: 'block px-4 py-2 text-red-600 w-full' %>

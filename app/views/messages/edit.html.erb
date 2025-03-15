@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "new_message" do %>
-  <p class="truncate bg-black rounded-lg text-white p-2"><%= @message.content %></p>
+  <p class="truncate bg-black rounded-lg text-white p-2 w-75"><%= @message.content %></p>
 
   <%= render "form", { message: @message } %>
 
   <div class="flex space-x-4 mt-2">
-    <%= link_to "Cancel", chat_messages_url(@chat), class: "bg-gray-400 text-sm text-white font-semibold py-2 px-3 rounded-lg hover:bg-gray-300" %>
+    <%= link_to "Cancel", chat_messages_url(@chat), class: "bg-gray-100 hover:bg-gray-50 text-black text-sm font-semibold py-2 px-3 rounded-lg hover:bg-gray-300" %>
 
     <%= link_to 'Destroy', chat_message_path(@chat, @message), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'bg-red-600 text-white text-sm font-semibold py-2 px-3 rounded-lg hover:bg-red-500' %>
   </div>
