@@ -13,7 +13,7 @@ class Identity::AvatarsController < ApplicationController
   end
 
   def destroy
-    @user.avatar.purge
+    @user.avatar.purge_later
 
     redirect_to identity_account_path(@user), notice: "Avatar was successfully destroyed"
   end
