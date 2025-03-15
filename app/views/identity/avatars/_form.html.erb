@@ -13,7 +13,9 @@
 
   <div class="my-3">
     <%= form.label :avatar %>
-    <%= form.file_field :avatar, accept: "image/png, image/jpeg, image/gif", class: "block shadow-sm rounded-md border border-gray-200 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+    <%= form.file_field :avatar, accept: "image/png, image/jpeg, image/gif",
+      class: "block shadow-sm rounded-md border border-gray-200 focus:outline-blue-600 px-3 py-2 mt-2 w-full",
+      data: { upload_preview_target: "fileInput", action: "upload-preview#preview" } %>
     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG or GIF.</p>
   </div>
 
@@ -23,5 +25,5 @@
     </div>
   </div>
 
-  <%= link_to 'Back to profile', identity_profile_path(@user), class: 'text-gray-700 underline hover:no-underline' %>
+  <%= link_to 'Back to profile', identity_account_path(@user), class: 'text-gray-700 underline hover:no-underline' %>
 <% end %>
