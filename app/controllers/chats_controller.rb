@@ -1,5 +1,6 @@
 class ChatsController < ApplicationController
   before_action :set_chat, only: %i[ show edit update destroy ]
+  before_action :set_participants, only: %i[ create ]
 
   # GET /chats
   def index
@@ -24,6 +25,8 @@ class ChatsController < ApplicationController
     @chat = Chat.new(chat_params)
 
     if @chat.save
+      Participant.create!(chat_id: @chat.id, user_id: @host.id)
+      Participant.create!(chat_id: @chat.id, user_id: @guest.id)
       redirect_to @chat, notice: "Chat was successfully created."
     else
       render :new, status: :unprocessable_entity
@@ -54,5 +57,13 @@ class ChatsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def chat_params
       params.expect(chat: [ :title ])
+    end
+
+    def set_participants
+      @host = Current.user
+      @guest = User.find_by!(name: params[:name])
+
+      rescue ActiveRecord::RecordNotFound
+        redirect_to root_path, alert: "Profile not found."
     end
 end

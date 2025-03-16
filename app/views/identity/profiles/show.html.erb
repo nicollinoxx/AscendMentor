@@ -8,4 +8,6 @@
   <h1 class="font-bold text-4xl mb-4">Profile</h1>
 
   <%= render partial: "identity/shared/profile" %>
+
+  <%= link_to 'Send a message', new_chat_path(name: @user.name) %>
 </div>

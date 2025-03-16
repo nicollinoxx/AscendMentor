@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_05_124009) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_15_223233) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,6 +53,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_124009) do
     t.index ["chat_id"], name: "index_messages_on_chat_id"
   end
 
+  create_table "participants", force: :cascade do |t|
+    t.integer "chat_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_participants_on_chat_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -74,5 +83,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_124009) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "messages", "chats"
+  add_foreign_key "participants", "chats"
+  add_foreign_key "participants", "users"
   add_foreign_key "sessions", "users"
 end

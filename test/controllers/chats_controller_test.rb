@@ -4,6 +4,8 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
   setup do
     authenticate(users(:one))
     @chat = chats(:one)
+    @host = users(:one)
+    @guest = users(:two)
   end
 
   test "should get index" do
@@ -16,9 +18,11 @@ class ChatsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create chat" do
-    assert_difference("Chat.count") do
-      post chats_url, params: { chat: { title: @chat.title } }
+  test "should create chat and participants" do
+    assert_difference("Chat.count", 1) do
+      assert_difference("Participant.count", 2) do
+        post chats_url, params: { chat: { title: @chat.title }, name: @guest.name }
+      end
     end
 
     assert_redirected_to chat_url(Chat.last)
