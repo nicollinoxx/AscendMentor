@@ -4,7 +4,7 @@ class ChatsController < ApplicationController
 
   # GET /chats
   def index
-    @chats = Chat.all
+    @chats = Current.user.chats
   end
 
   # GET /chats/1
@@ -23,15 +23,16 @@ class ChatsController < ApplicationController
   # POST /chats
   def create
     @chat = Chat.new(chat_params)
+    @participants = [ @chat.participants.build(user_id: @host.id), @chat.participants.build(user_id: @guest.id) ]
 
     if @chat.save
-      Participant.create!(chat_id: @chat.id, user_id: @host.id)
-      Participant.create!(chat_id: @chat.id, user_id: @guest.id)
+      @participants.each(&:save)
       redirect_to @chat, notice: "Chat was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
   end
+
 
   # PATCH/PUT /chats/1
   def update

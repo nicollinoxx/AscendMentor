@@ -5,5 +5,5 @@ one:
   user: one
 
 two:
-  chat: two
+  chat: one
   user: two
