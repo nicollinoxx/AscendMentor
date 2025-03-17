@@ -1,5 +1,10 @@
-<div id="<%= dom_id chat %>" class="my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">Title</strong><%= chat.title %>
-  </div>
+<div id="<%= dom_id chat %>" class="my-4">
+    <% chat.participants.each do |participant| %>
+      <% if participant.user != Current.user %>
+        <div class="flex items-center">
+            <%= image_tag participant.user.avatar, class: "border-3 border-blue-600 object-cover rounded-full min-w-18 max-w-18 h-18" if participant.user.avatar.attached? %>
+            <p class='ml-2 text-wrap'><%= participant.user.name %></p>
+        </div>
+      <% end %>
+    <% end %>
 </div>
