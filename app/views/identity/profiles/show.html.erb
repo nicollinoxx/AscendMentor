@@ -9,5 +9,5 @@
 
   <%= render partial: "identity/shared/profile" %>
 
-  <%= link_to 'Send a message', new_chat_path(name: @user.name) %>
+  <%= button_to 'Send a message', create_chat_path(guest: @user.name) %>
 </div>

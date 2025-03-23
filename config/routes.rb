@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     resources :avatars,  only: %i[ edit update destroy ]
   end
 
-  resources :chats do
+  post "chats/:guest", to: "chats#create", as: :create_chat
+  resources :chats, only: %i[ index destroy ] do
     resources :messages, except: %i[ new show ]
   end
 

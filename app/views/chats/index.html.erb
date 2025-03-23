@@ -13,12 +13,9 @@
     <% @chats.each do |chat| %>
       <div class="flex justify-between items-center">
         <%= render chat %>
-        <div class="flex flex-col">
+        <div class="text-center">
           <%= link_to "Messages", chat_messages_path(chat), class: "text-center rounded-md p-2 bg-gray-600 hover:bg-gray-500 text-white font-medium" %>
-          <div class="flex mt-2 space-x-3">
-            <%= link_to "Show", chat, class: "font-medium" %>
-            <%= link_to "Destroy", chat, method: :delete, class: "text-red-600 font-medium", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
+          <%= button_to "Destroy", chat, method: :delete, class: "text-red-600 font-medium mt-3", data: { turbo_confirm: "Are you sure?" } %>
         </div>
       </div>
     <% end %>
