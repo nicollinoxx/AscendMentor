@@ -14,7 +14,7 @@ class ChatsController < ApplicationController
     if @chat.save
       redirect_to chat_messages_path(@chat), notice: "Chat was successfully created."
     else
-      render :new, status: :unprocessable_entity
+      redirect_to identity_profile_path(@guest.name), alert: "#{@chat.errors.full_messages.join(', ')}"
     end
   end
 
