@@ -18,9 +18,10 @@ class MessagesController < ApplicationController
   # POST /messages
   def create
     @message = @chat.messages.build(message_params)
+    @message.user_id = Current.user.id
 
     if @message.save
-      @message.broadcast_append_to(@chat, target: "messages", partial: "messages/message", locals: { chat: @chat, message: @message })
+      @message.broadcast_append_to(@chat, partial: "messages/message", locals: { chat: @chat, message: @message })
 
       redirect_to chat_messages_url(@chat)
     else

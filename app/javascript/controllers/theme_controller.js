@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Funções utilitárias simplificadas
 const getCookie = name => document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
 const setCookie = (name, value) => document.cookie = `${name}=${value}; path=/; max-age=31536000`;
 
@@ -10,7 +9,6 @@ export default class extends Controller {
   connect() {
     const theme = getCookie("theme") || "light";
     document.documentElement.classList.add(theme);
-    this.updateButtonText(theme);
   }
 
   toggle() {
