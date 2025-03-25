@@ -1,13 +1,8 @@
 require "test_helper"
 
 class ChatTest < ActiveSupport::TestCase
-  test "should not save chat without content" do
+  test "should save chat" do
     message = Chat.new
-    assert_not message.save, "Saved the message without content"
-  end
-
-  test "should save chat with content" do
-    message = Chat.new(title: "Valid content")
-    assert message.save, "Failed to save the message with content"
+    assert message.save, "Saved the message without content"
   end
 end

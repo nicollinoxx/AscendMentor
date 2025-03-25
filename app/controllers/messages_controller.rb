@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
   # GET /messages
   def index
     @messages = @chat.messages
+    @participant = @chat.users.where.not(id: Current.user.id).first
   end
 
   def new
