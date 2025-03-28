@@ -1,6 +1,6 @@
 <div id="<%= dom_id message %>" class="my-2 <%= 'flex justify-end' if message.user_id == Current.user.id %>">
     <div id="message" class="inline-flex rounded-lg p-2 <%= message.user_id == Current.user.id ? 'bg-slate-200 dark:bg-slate-800' : 'bg-indigo-100 dark:bg-slate-600' %>">
-      <p class="text-wrap max-w-[20rem] md:max-w-[35rem]"><%= message.content %></p>
+      <p class="text-wrap max-w-[15rem] md:max-w-[35rem]"><%= message.content %></p>
       <%= link_to 'Edit', edit_chat_message_path(chat, message), data: { turbo_frame: 'new_message' }, class: "mt-auto ml-2 text-purple-600 text-xs" if message.user_id == Current.user.id %>
   </div>
 </div>
