@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_23_232347) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_27_141823) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -71,6 +71,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_23_232347) do
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
+  create_table "user_details", force: :cascade do |t|
+    t.text "description"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_details_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
     t.string "password_digest", null: false
@@ -86,4 +94,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_23_232347) do
   add_foreign_key "participants", "chats"
   add_foreign_key "participants", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "user_details", "users"
 end

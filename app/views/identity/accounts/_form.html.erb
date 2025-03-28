@@ -15,6 +15,11 @@
     <%= form.text_field :name, placeholder: "Username", class: "block shadow-sm rounded-md border border-gray-300 focus:outline-blue-600 dark:bg-slate-600 px-3 py-2 mt-2 w-full" %>
   </div>
 
+  <div class="my-5">
+    <%= form.label :description %>
+    <%= form.text_area :description, value: @user.user_detail&.description, name: "user[user_detail_attributes][description]", class: "block shadow-sm rounded-md border border-gray-300 focus:outline-blue-600 dark:bg-slate-600 px-3 py-2 mt-2 w-full" %>
+  </div>
+
   <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
     <div class="inline">
       <%= form.submit "Update profile", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>

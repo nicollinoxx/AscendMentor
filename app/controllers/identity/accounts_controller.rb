@@ -19,6 +19,6 @@ class Identity::AccountsController < ApplicationController
   private
 
     def user_params
-      params.expect(user: [ :name ])
+      params.expect(user: [ :name, user_detail_attributes: [ :description ] ])
     end
 end
