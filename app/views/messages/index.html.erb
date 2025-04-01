@@ -3,8 +3,13 @@
 <% content_for :title, "Messages" %>
 
 <div class="w-full mt-20" data-controller='scroll'>
-    <div class='fixed top-20 flex justify-start items-center space-x-2'>
-        <%= link_to image_tag(@participant.avatar || '', class: 'border-3 border-blue-600 object-cover rounded-full min-w-14 max-w-14 h-14'), identity_profile_path(@participant.name) %>
+    <div class='fixed top-24 flex justify-start items-center space-x-2'>
+        <% if @participant.avatar.attached? %>
+            <%= link_to image_tag(@participant.avatar, class: 'border-3 border-blue-600 object-cover rounded-full min-w-14 max-w-14 h-14'), identity_profile_path(@participant.name) %>
+        <% else %>
+            <div class="bg-gray-600 border-3 border-blue-600 object-cover rounded-full min-w-14 max-w-14 h-14"></div>
+        <% end %>
+
         <h1 class="text-lg"><%= @participant.name %></h1>
     </div>
 

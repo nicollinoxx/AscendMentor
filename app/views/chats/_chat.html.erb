@@ -1,9 +1,14 @@
 <div id="<%= dom_id chat %>" class="my-4">
-    <% chat.participants.each do |participant| %>
-      <% if participant.user != Current.user %>
+    <% chat.users.each do |participant| %>
+      <% if participant != Current.user %>
         <div class="flex items-center">
-          <%= link_to image_tag(participant.user.avatar || '', class: 'border-3 border-blue-600 object-cover rounded-full min-w-18 max-w-18 h-18'), identity_profile_path(participant.user.name) %>
-          <p class='ml-2 text-wrap'><%= participant.user.name %></p>
+          <% if participant.avatar.attached? %>
+              <%= link_to image_tag(participant.avatar, class: 'border-3 border-blue-600 object-cover rounded-full min-w-18 max-w-18 h-18'), identity_profile_path(participant.name) %>
+          <% else %>
+              <div class="bg-gray-600 border-3 border-blue-600 object-cover rounded-full min-w-18 max-w-18 h-18"></div>
+          <% end %>
+
+          <p class='ml-2 text-wrap'><%= participant.name %></p>
         </div>
       <% end %>
     <% end %>
