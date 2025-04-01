@@ -5,6 +5,8 @@ class Message < ApplicationRecord
 
   after_save_commit :broadcast_message
 
+  broadcasts_to :chat, target: "messages", locals: { chat: @chat }, action: :append
+
   private
 
     def broadcast_message

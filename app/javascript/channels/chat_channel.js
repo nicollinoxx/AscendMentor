@@ -1,29 +1,43 @@
 import consumer from "channels/consumer"
 
+// Dados do usuário e chat
+var chatId = document.getElementById("messages")?.dataset.chatId;
+var currentUser = document.querySelector('[data-current-user]')?.dataset.currentUser;
+
 function chatChannel() {
-  const chatId = document.getElementById("messages")?.dataset.chatId;
-  const currentUser = document.querySelector('[data-current-user]')?.dataset.currentUser;
-
   consumer.subscriptions.create({ channel: "ChatChannel", id: chatId }, {
-    received(data) {
-      setTimeout(() => this.positionMessage(data), 15);
-    },
-
-    positionMessage(data) {
-      const messageElement = document.getElementById(`message_${data.message_id}`);
-      if (messageElement && data.sender != parseInt(currentUser)) {
-        messageElement.classList.remove('flex', 'justify-end');
-        messageElement.querySelector('a[href*="edit"]')?.remove();
-        toggleMessageBackground(messageElement);
-      }
+    async received(data) {
+      await new Promise(resolve => setTimeout(resolve, 20));
+      positionMessage(data);
+      scrollToBottom();
     }
   });
 }
 
-function toggleMessageBackground(messageElement) {
+// Ajusta posição e estilo da mensagem recebida
+function positionMessage(data) {
+  const messageElement = document.getElementById(`message_${data.message_id}`);
+  if (messageElement && data.sender != parseInt(currentUser)) {
+    messageElement.classList.remove('flex', 'justify-end');
+    messageElement.querySelector('a[href*="edit"]')?.remove();
+    messageBackground(messageElement);
+  }
+}
+
+// Altera cores do fundo da mensagem
+function messageBackground(messageElement) {
   const message = messageElement.querySelector('#message');
   message.classList.remove('bg-slate-200', 'dark:bg-slate-800');
   message.classList.add('bg-indigo-100', 'dark:bg-slate-600');
 }
 
-document.addEventListener("turbo:load", chatChannel);
+// Verifica se está próximo ao fim da página
+function isAtBottom() {
+  return document.body.scrollHeight - (window.innerHeight + window.scrollY) <= 2000;
+}
+// Rola suavemente até o fim quando próximo
+function scrollToBottom() {
+ isAtBottom() ? window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }) : null;
+}
+
+document.addEventListener("turbo:load", () => {chatChannel();});

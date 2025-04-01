@@ -13,5 +13,5 @@
 
   <%= render partial: "identity/shared/profile" %>
 
-  <%= button_to 'Send a message', create_chat_path(guest: @user.name)  %>
+  <%= button_to 'Send a message', create_chat_path(guest: @user.name), data: { turbo: false }  %>
 </div>

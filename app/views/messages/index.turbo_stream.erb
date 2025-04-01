@@ -1,0 +1,5 @@
+<%= turbo_stream.replace :next_page_container, partial: "messages/message", locals: { chat: @chat }, collection: @page.records, as: :message %>
+
+<% unless @page.last? %>
+  <%= turbo_stream.append :messages, partial: "messages/next_page_container", locals: { page: @page.next_param } %>
+<% end %>
