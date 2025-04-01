@@ -4,8 +4,8 @@ export default class extends Controller {
   static targets = ["scrollButton"];
 
   connect() {
-    window.scrollTo(0, document.body.scrollHeight);
     this.isScrollButtonVisible();
+    window.addEventListener("turbo:load", () => {window.scrollTo(0, document.body.scrollHeight);});
     window.addEventListener("scroll", this.isScrollButtonVisible.bind(this));
   }
 

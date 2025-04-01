@@ -1,43 +1,36 @@
 import consumer from "channels/consumer"
 
-// Dados do usuário e chat
-var chatId = document.getElementById("messages")?.dataset.chatId;
-var currentUser = document.querySelector('[data-current-user]')?.dataset.currentUser;
-
+//main
 function chatChannel() {
+  const chatId = document.getElementById("messages")?.dataset.chatId;
+  const userId = parseInt(document.querySelector('[data-current-user]')?.dataset.currentUser);
+
   consumer.subscriptions.create({ channel: "ChatChannel", id: chatId }, {
-    async received(data) {
-      await new Promise(resolve => setTimeout(resolve, 20));
-      positionMessage(data);
-      scrollToBottom();
+    received(data) {
+      setTimeout(() => { positionMessage(data, userId); scrollToBottom(); }, 20);
     }
   });
 }
 
-// Ajusta posição e estilo da mensagem recebida
-function positionMessage(data) {
+//position messages left or right
+function positionMessage(data, userId) {
   const messageElement = document.getElementById(`message_${data.message_id}`);
-  if (messageElement && data.sender != parseInt(currentUser)) {
-    messageElement.classList.remove('flex', 'justify-end');
-    messageElement.querySelector('a[href*="edit"]')?.remove();
-    messageBackground(messageElement);
-  }
+  if (!messageElement || data.sender == userId) return;
+
+  messageElement.classList.remove("flex", "justify-end");
+  messageElement.querySelector("#message")?.classList.replace("bg-slate-200", "bg-indigo-100");
+  messageElement.querySelector('a[href*="edit"]')?.remove();
 }
 
-// Altera cores do fundo da mensagem
-function messageBackground(messageElement) {
-  const message = messageElement.querySelector('#message');
-  message.classList.remove('bg-slate-200', 'dark:bg-slate-800');
-  message.classList.add('bg-indigo-100', 'dark:bg-slate-600');
-}
-
-// Verifica se está próximo ao fim da página
+//follow messages
 function isAtBottom() {
-  return document.body.scrollHeight - (window.innerHeight + window.scrollY) <= 2000;
-}
-// Rola suavemente até o fim quando próximo
-function scrollToBottom() {
- isAtBottom() ? window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }) : null;
+  return window.innerHeight + window.scrollY >= document.body.scrollHeight - 1000;
 }
 
-document.addEventListener("turbo:load", () => {chatChannel();});
+function scrollToBottom() {
+   if (isAtBottom()) {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+   }
+}
+
+document.addEventListener("turbo:load", chatChannel);

@@ -1,6 +1,5 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    reject unless params[:id]
-    stream_from "chat_#{params[:id]}"
+    stream_for Chat.find(params[:id])
   end
 end

@@ -15,7 +15,7 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   test "should create message" do
     assert_difference -> { Message.count } do
       post chat_messages_url(@chat),
-           params: { message: { content: "Nova mensagem" } }, as: :turbo_stream # Especifica o formato
+           params: { message: { content: "New message" } }, as: :turbo_stream
     end
 
     assert_response :success
@@ -27,11 +27,11 @@ class MessagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update message" do
-    patch chat_message_url(@chat, @message), params: { message: { content: "Mensagem atualizada" } },as: :turbo_stream
+    patch chat_message_url(@chat, @message), params: { message: { content: "Message updated" } }, as: :turbo_stream
 
     assert_response :success
     @message.reload
-    assert_equal "Mensagem atualizada", @message.content
+    assert_equal "Message updated", @message.content
   end
 
   test "should destroy message" do
