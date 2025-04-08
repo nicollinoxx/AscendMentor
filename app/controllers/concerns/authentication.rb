@@ -46,7 +46,12 @@ module Authentication
     end
 
     def terminate_session
-      Current.session.destroy
-      cookies.delete(:session_id)
+      destroy_session
+      cookies.delete(:session_id) if Current.session == @session
+    end
+
+    def destroy_session
+      @session = Current.user.sessions.find(params[:id])
+      @session.destroy
     end
 end

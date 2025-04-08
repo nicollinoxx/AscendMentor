@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   resources :registrations, only: %i[ new create ]
 
-  resource  :session
-  get "sessions", to: "sessions#index"
+  resources :sessions, only: %i[ index new create destroy ]
 
   resources :passwords, param: :token
 

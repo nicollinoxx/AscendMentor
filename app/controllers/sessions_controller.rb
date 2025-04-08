@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    terminate_session
-    redirect_to new_session_path
+    terminate_session; redirect_to sessions_url, notice: "Session destroyed successfully."
   end
 end

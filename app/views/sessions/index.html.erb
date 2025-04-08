@@ -1,9 +1,14 @@
 <% content_for :title, "Sessions" %>
 
-<div class="w-full" data-controller='scroll'>
+<div class="w-full">
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl mb-3">Sessions</h1>
   </div>
+
+  <% if notice = flash[:notice] %>
+    <p class="mb-5 py-2 px-3 bg-green-50 dark:bg-white text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
 
   <div class="divide-y divide-gray-200 space-y-5">
     <% @sessions.each do |session| %>
@@ -12,7 +17,7 @@
           <strong>IP:</strong> <%= session.ip_address %><br>
           <strong>Device:</strong> <%= session.user_agent %>
         </p>
-        <%= button_to 'Destroy', session_path(session), method: :delete, class: 'm-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium' %>
+        <%= button_to 'Destroy', session, method: :delete, class: 'm-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium' %>
       </div>
     <% end %>
   </div>
