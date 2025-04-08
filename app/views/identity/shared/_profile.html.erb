@@ -1,34 +1,36 @@
-<% content_for :title, "Profile" %>
+<% cache(@user) do %>
+  <% content_for :title, "Profile" %>
 
-<div class="w-full mb-12">
-  <div class="flex flex-col lg:flex-row justify-center items-center mb-5">
-    <div class="relative m-5">
-      <% if @user.avatar.attached? %>
-        <%= image_tag @user.avatar, class: 'border-3 border-blue-600 object-cover rounded-full w-36 h-36 mx-auto' %>
-      <% else %>
-        <div class="bg-gray-600 border-3 border-blue-600 object-cover rounded-full w-36 h-36 mx-auto"></div>
-      <% end %>
+  <div class="w-full mb-12">
+    <div class="flex flex-col lg:flex-row justify-center items-center mb-5">
+      <div class="relative m-5">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar, class: 'border-3 border-blue-600 object-cover rounded-full w-36 h-36 mx-auto' %>
+        <% else %>
+          <div class="bg-gray-600 border-3 border-blue-600 object-cover rounded-full w-36 h-36 mx-auto"></div>
+        <% end %>
 
-      <%= render partial: 'identity/shared/dropdown' if params[:name].nil? %>
+        <%= render partial: 'identity/shared/dropdown' if params[:name].nil? %>
+      </div>
+
+      <div class="lg:text-left">
+        <h2 class="text-2xl mb-2"><%= @user.name %></h2>
+        <p>
+          <strong>Email: </strong> <%= @user.email_address %>
+        </p>
+      </div>
     </div>
 
-    <div class="lg:text-left">
-      <h2 class="text-2xl mb-2"><%= @user.name %></h2>
-      <p>
-        <strong>Email: </strong> <%= @user.email_address %>
-      </p>
+    <div class="py-3 flex items-center text-2xl text-indigo-400 before:flex-1 before:border-t before:me-6 after:flex-1 after:border-t after:ms-6 ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+        </svg>
+    </div>
+
+    <div class="container mx-auto">
+      <div class="text-center px-4">
+        <p class="mx-auto text-md"><%= @user.user_detail.description || "No description provided" %></p>
+      </div>
     </div>
   </div>
-
-  <div class="py-3 flex items-center text-2xl text-indigo-400 before:flex-1 before:border-t before:me-6 after:flex-1 after:border-t after:ms-6 ">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-      </svg>
-  </div>
-
-  <div class="container mx-auto">
-    <div class="text-center px-4">
-      <p class="mx-auto text-md"><%= @user.user_detail.description || "No description provided" %></p>
-    </div>
-  </div>
-</div>
+<% end %>

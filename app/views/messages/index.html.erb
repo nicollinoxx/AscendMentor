@@ -1,4 +1,4 @@
-<div data-current-user="<%= Current.user.id %>"></div>
+<div data-current-user="<%= Current.user.name %>" hidden></div>
 
 <% content_for :title, "Messages" %>
 
@@ -28,8 +28,7 @@
       </button>
     </div>
 
-    <%= turbo_frame_tag "new_message" do %>
-        <%= render "form", { message: @chat.messages.build } %>
-    <% end %>
+
+        <%= render "form", { chat: @chat, message: @chat.messages.build } %>
   </div>
 </div>

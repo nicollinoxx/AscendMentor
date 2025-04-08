@@ -5,7 +5,6 @@ export default class extends Controller {
 
   connect() {
     this.isScrollButtonVisible();
-    window.addEventListener("turbo:load", () => {window.scrollTo(0, document.body.scrollHeight);});
     window.addEventListener("scroll", this.isScrollButtonVisible.bind(this));
   }
 
@@ -25,3 +24,5 @@ export default class extends Controller {
     this.scrollButtonTarget.hidden = this.isAtBottom();
   }
 }
+
+document.addEventListener("turbo:load", () => {window.scrollTo(0, document.body.scrollHeight);});

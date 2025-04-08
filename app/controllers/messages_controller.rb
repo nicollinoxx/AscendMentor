@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
 
     if @message.save
       @message.broadcast_prepend_to(@chat, partial: "messages/message", locals: { chat: @chat, message: @message })
-      render turbo_stream: turbo_stream.update("new_message", partial: "messages/form", locals: { message: @chat.messages.build })
+      update_form_with_turbo_stream
     end
   end
 
@@ -29,7 +29,7 @@ class MessagesController < ApplicationController
   def update
     if @message.update(message_params)
       @message.broadcast_replace_to(@chat, target: "message_#{@message.id}", partial: "messages/message", locals: { chat: @chat, message: @message })
-      render turbo_stream: turbo_stream.update("new_message", partial: "messages/form", locals: { message: @chat.messages.build })
+      update_form_with_turbo_stream
     end
   end
 
@@ -37,10 +37,14 @@ class MessagesController < ApplicationController
   def destroy
     @message.destroy!
     @message.broadcast_remove_to(@chat, target: "message_#{@message.id}")
-    render turbo_stream: turbo_stream.update("new_message", partial: "messages/form", locals: { message: @chat.messages.build })
+    update_form_with_turbo_stream
   end
 
   private
+    def update_form_with_turbo_stream
+       render turbo_stream: turbo_stream.update("new_message", partial: "messages/form", locals: { chat: @chat, message: @chat.messages.build })
+    end
+
     def set_chat
       @chat = Chat.find(params[:chat_id])
     end

@@ -8,6 +8,6 @@ class Message < ApplicationRecord
   private
 
     def broadcast_message
-      ChatChannel.broadcast_to(chat, { sender: user_id, message_id: id })
+      ChatChannel.broadcast_to(chat, { sender: Current.user.name, message_id: id })
     end
 end

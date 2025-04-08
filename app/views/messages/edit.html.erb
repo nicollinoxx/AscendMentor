@@ -8,5 +8,5 @@
       <%= link_to "Cancel", chat_messages_url(@chat), class: "text-yellow-500 text-sm font-semibold ml-2" %>
   </div>
 
-  <%= render "form", { message: @message } %>
+  <%= render "form", { chat: @chat, message: @message } %>
 <% end %>
