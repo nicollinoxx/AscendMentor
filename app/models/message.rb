@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
   belongs_to :chat
+  belongs_to :user
 
   validates :content, presence: true
 
@@ -8,6 +9,6 @@ class Message < ApplicationRecord
   private
 
     def broadcast_message
-      ChatChannel.broadcast_to(chat, { sender: Current.user.name, message_id: id })
+      ChatChannel.broadcast_to(chat, { sender: user.name, message_id: id })
     end
 end

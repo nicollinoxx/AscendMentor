@@ -1,5 +1,5 @@
 class AddUserIdToMessages < ActiveRecord::Migration[8.0]
   def change
-    add_column :messages, :user_id, :integer, null: false
+    add_reference :messages, :user, null: false, foreign_key: true
   end
 end

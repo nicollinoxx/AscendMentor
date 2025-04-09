@@ -3,9 +3,9 @@
 one:
   content: MyText
   chat: one
-  user_id: 1
+  user: one
 
 two:
   content: MyText
   chat: two
-  user_id: 2
+  user: two

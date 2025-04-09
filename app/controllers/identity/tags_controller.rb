@@ -34,7 +34,7 @@ class Identity::TagsController < ApplicationController
 
   def destroy
     @tag.destroy
-    redirect_to identity_account_path(@user), notice: 'Tag was successfully destroyed.'
+    redirect_to identity_account_path(@user), notice: "Tag was successfully destroyed."
   end
 
   private

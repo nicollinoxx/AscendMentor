@@ -11,7 +11,7 @@ module ActiveSupport
     fixtures :all
 
     def authenticate(user)
-      post(session_url, params: { email_address: user.email_address, password: "password" })
+      post(sessions_url, params: { email_address: user.email_address, password: "password" })
     end
   end
 end

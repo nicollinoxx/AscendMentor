@@ -29,6 +29,8 @@
     </div>
 
 
-    <%= render "form", { chat: @chat, message: @chat.messages.build } %>
+    <%= turbo_frame_tag "new_message" do %>
+        <%= render "form", { chat: @chat, message: @chat.messages.build } %>
+    <% end %>
   </div>
 </div>
