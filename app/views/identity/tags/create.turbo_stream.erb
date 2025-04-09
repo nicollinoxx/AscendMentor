@@ -1,0 +1,5 @@
+<%= turbo_stream.append "tags", partial: "identity/shared/tag", locals: { tag: @tag } %>
+
+<%= turbo_stream.update "tag" do %>
+  <%= link_to "add tag", new_identity_tag_path, class: "py-1 px-2 mt-2 bg-blue-600 rounded-md text-white inline-block" %>
+<% end %>

@@ -21,7 +21,24 @@
       </div>
     </div>
 
-    <div class="py-3 flex items-center text-2xl text-indigo-400 before:flex-1 before:border-t before:me-6 after:flex-1 after:border-t after:ms-6 ">
+    <div class="mb-4 flex items-center text-2xl text-blue-600 before:flex-1 before:border-t before:me-6 after:flex-1 after:border-t after:ms-6 ">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+        </svg>
+    </div>
+
+    <div id="tags" class="mb-4 flex items-center space-x-4 flex-wrap justify-center">
+      <%= render partial: "identity/shared/tag", collection: @user.tags, as: :tag %>
+    </div>
+
+    <% if params[:name].nil? %>
+        <%= turbo_frame_tag "tag" do %>
+            <%= link_to "add tag", new_identity_tag_path, class: "py-1 px-2 mt-2 bg-blue-600 rounded-md text-white inline-block" %>
+        <% end %>
+    <% end %>
+
+    <div class="py-3 flex items-center text-2xl text-purple-400 before:flex-1 before:border-t before:me-6 after:flex-1 after:border-t after:ms-6 ">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
           <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
         </svg>

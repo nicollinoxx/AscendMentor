@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :profiles, param: :name, only: %i[ index show ]
     resources :accounts, only: %i[ show edit update ]
     resources :avatars,  only: %i[ edit update destroy ]
+    resources :tags,     except: %i[ index show ]
   end
 
   post "chats/:guest", to: "chats#create", as: :create_chat
