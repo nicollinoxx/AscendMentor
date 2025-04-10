@@ -1,0 +1,3 @@
+Hey <%= @guest.name %>, <%= @host.name %> created a chat with you.
+You can join the chat by clicking on the link below:
+<%= link_to 'Go to chat', chat_messages_url(@chat) %>

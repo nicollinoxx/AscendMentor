@@ -12,7 +12,8 @@ class ChatsController < ApplicationController
     @chat.participants.build(user_id: @guest.id)
 
     if @chat.save
-      redirect_to chat_messages_path(@chat), notice: "Chat was successfully created."
+      redirect_to chat_messages_path(@chat)
+      ChatsMailer.notify(@chat, @host, @guest).deliver_later
     else
       redirect_to identity_profile_path(@guest.name), alert: "#{@chat.errors.full_messages.join(', ')}"
     end
