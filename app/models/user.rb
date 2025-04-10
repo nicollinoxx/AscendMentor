@@ -14,4 +14,9 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   validates :name, :email_address, presence: true, uniqueness: true
+
+  scope :search_by_name_or_tag, -> (name) {
+    left_joins(:tags).where('users.name LIKE :name OR tags.name LIKE :name', name: "#{name}%")
+    .distinct.order(:name)
+  }
 end

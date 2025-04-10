@@ -13,6 +13,6 @@ class Identity::ProfilesController < ApplicationController
 
     def search_profiles
       return User.order(:name) unless params[:name].present?
-      User.joins(:tags).where("users.name LIKE ? OR tags.name LIKE ?", "#{params[:name]}%", "#{params[:name]}%").distinct.order(:name)
+      User.search_by_name_or_tag(params[:name])
     end
 end
