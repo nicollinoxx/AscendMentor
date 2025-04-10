@@ -4,16 +4,26 @@ export default class extends Controller {
   static targets = ["scrollButton"];
 
   connect() {
+    this.scrollHandler = this.isScrollButtonVisible.bind(this);
+    this.scrollToBottomHandler = this.scrollToBottom.bind(this);
+
+    window.addEventListener("turbo:load", this.scrollToBottomHandler);
+    window.addEventListener("scroll", this.scrollHandler);
+
     this.isScrollButtonVisible();
-    window.addEventListener("scroll", this.isScrollButtonVisible.bind(this));
   }
 
   disconnect() {
-    window.removeEventListener("scroll", this.isScrollButtonVisible.bind(this));
+    window.removeEventListener("scroll", this.scrollHandler);
+    window.removeEventListener("turbo:load", this.scrollToBottomHandler);
   }
 
   scrollToEnd() {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }
+
+  scrollToBottom() {
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   isAtBottom() {
@@ -24,5 +34,3 @@ export default class extends Controller {
     this.scrollButtonTarget.hidden = this.isAtBottom();
   }
 }
-
-document.addEventListener("turbo:load", () => {window.scrollTo(0, document.body.scrollHeight);});

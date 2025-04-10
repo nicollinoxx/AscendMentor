@@ -1,5 +1,5 @@
-<div id="<%= dom_id(tag) %>" class="flex items-center space-y-2">
-    <div class="bg-white shadow-md flex items-center space-x-1 max-h-8 <%= cycle('text-indigo-600', 'text-yellow-500') %> font-medium px-1.5 py-1 rounded-md">
+<div id="<%= dom_id(tag) %>" class="text-sm flex items-center mb-3 mt-1">
+    <div class="bg-slate-600 flex items-center space-x-1 max-h-8 <%= cycle('text-white', 'text-yellow-500') %> px-1.5 py-1 rounded-md">
         <div class="tag-name"><%= tag.name %></div>
 
         <% if params[:name].nil? %>

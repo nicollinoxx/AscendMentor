@@ -1,0 +1,12 @@
+<div class="flex justify-between items-center pb-4">
+  <div class='flex items-center'>
+    <% if user.avatar.attached? %>
+      <%= image_tag user.avatar, class: 'border-3 border-blue-600 object-cover rounded-full min-w-18 max-w-18 h-18' %>
+    <% else %>
+      <div class="bg-gray-300 border-3 border-blue-600 rounded-full min-w-18 max-w-18 h-18"></div>
+    <% end %>
+    <p class='font-medium mx-2 text-wrap'><%= user.name %></p>
+  </div>
+
+  <%= link_to 'Show Profile', identity_profile_path(user.name), class: 'rounded-md p-2 bg-gray-600 hover:bg-gray-500 text-white text-center font-medium' %>
+</div>

@@ -1,22 +1,18 @@
 <div class="w-full">
-  <div class="mb-5">
+  <div class="mb-2">
     <h1 class="font-bold text-4xl">Profiles</h1>
   </div>
 
-  <div id="profiles" class="min-w-full divide-y divide-gray-300 space-y-5">
-    <% @users.each do |user| %>
-      <div class="flex justify-between items-center pb-4">
-        <div class='flex items-center'>
-          <% if user.avatar.attached? %>
-          <div><%= image_tag user.avatar, class: 'border-3 border-blue-600 object-cover rounded-full min-w-18 max-w-18 h-18' %></div>
-          <% else %>
-            <div class="bg-gray-300 border-3 border-blue-600 rounded-full min-w-18 max-w-18 h-18"></div>
-          <% end %>
+  <%= form_with url: identity_profiles_path, method: :get, local: true do %>
+    <div class="mb-10 mt-4">
+      <%= text_field_tag :name, params[:name], placeholder: "Search profiles...",
+            class: "block bg-white shadow-md rounded-md border-gray-300 outline outline-blue-300 focus:outline-blue-600 dark:bg-slate-600 px-3 py-2 mt-2 w-full",
+            onchange: "this.form.submit()" %>
+    </div>
+  <% end %>
 
-          <p class='font-medium mx-2 text-wrap'><%= user.name %></p>
-        </div>
-        <%= link_to 'Show Profile', identity_profile_path(user.name), class: 'rounded-md p-2 bg-gray-600 hover:bg-gray-500 text-white text-center font-medium' %>
-      </div>
-    <% end %>
+  <div id="profiles" class="min-w-full divide-y divide-gray-300 space-y-5">
+    <%= render partial: "identity/profiles/profile", collection: @page.records, as: :user %>
+    <%= render "layouts/next_page_container", src: identity_profiles_path(page: @page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 </div>

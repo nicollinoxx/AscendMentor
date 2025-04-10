@@ -7,7 +7,6 @@ class Identity::TagsController < ApplicationController
   end
 
   def edit
-    @tag = @user.tags.find(params[:id])
   end
 
   def create

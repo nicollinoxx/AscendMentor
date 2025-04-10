@@ -3,7 +3,7 @@
 <% content_for :title, "Messages" %>
 
 <div class="w-full" data-controller='scroll'>
-    <div class='fixed top-20 flex justify-start items-center space-x-2'>
+    <div class='fixed top-22 flex justify-start items-center space-x-2'>
         <% if @participant.avatar.attached? %>
             <%= link_to image_tag(@participant.avatar, class: 'border-3 border-blue-600 object-cover rounded-full min-w-14 max-w-14 h-14'), identity_profile_path(@participant.name) %>
         <% else %>
@@ -14,9 +14,9 @@
     </div>
 
   <%= turbo_stream_from @chat %>
-  <div id="messages" data-chat-id="<%= @chat.id %>" class="pb-22 pt-10 flex flex-col-reverse">
+  <div id="messages" data-chat-id="<%= @chat.id %>" class="pb-20 pt-10 flex flex-col-reverse">
     <%= render partial: "messages/message", locals: { chat: @chat }, collection: @page.records, as: :message %>
-    <%= render "messages/next_page_container", page: @page.next_param unless @page.last? %>
+    <%= render "layouts/next_page_container", src: chat_messages_path(chat: @chat, page: @page.next_param, format: :turbo_stream) unless @page.last? %>
   </div>
 
   <div class="fixed bottom-0 w-full mb-6 container pr-10">
@@ -27,7 +27,6 @@
         </svg>
       </button>
     </div>
-
 
     <%= turbo_frame_tag "new_message" do %>
         <%= render "form", { chat: @chat, message: @chat.messages.build } %>
