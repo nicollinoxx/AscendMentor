@@ -8,8 +8,9 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new
-    @chat.participants.build(user_id: @host.id)
-    @chat.participants.build(user_id: @guest.id)
+    chat_key = [@host.id, @guest.id].sort.join('-')
+    @chat.participants.build(user_id: @host.id, chat_key: chat_key)
+    @chat.participants.build(user_id: @guest.id, chat_key: chat_key)
 
     if @chat.save
       redirect_to chat_messages_path(@chat)

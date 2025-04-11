@@ -7,6 +7,7 @@ class Identity::ProfilesController < ApplicationController
 
   def show
     @user = User.find_by!(name: params[:name])
+    @chat = @user.participants.find_by(chat_key: set_chat_key)&.chat
   end
 
   private
@@ -14,5 +15,9 @@ class Identity::ProfilesController < ApplicationController
     def search_profiles
       return User.order(:name) unless params[:name].present?
       User.search_by_name_or_tag(params[:name])
+    end
+
+    def set_chat_key
+      [Current.user.id, @user.id].sort.join('-')
     end
 end

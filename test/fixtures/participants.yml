@@ -3,7 +3,9 @@
 one:
   chat: one
   user: one
+  chat_key: 1-2
 
 two:
   chat: one
   user: two
+  chat_key: 2-3
