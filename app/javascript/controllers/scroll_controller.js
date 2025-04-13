@@ -7,15 +7,16 @@ export default class extends Controller {
     this.scrollHandler = this.isScrollButtonVisible.bind(this);
     this.scrollToBottomHandler = this.scrollToBottom.bind(this);
 
-    window.addEventListener("turbo:load", this.scrollToBottomHandler);
+    document.addEventListener("turbo:load", this.scrollToBottomHandler);
     window.addEventListener("scroll", this.scrollHandler);
 
     this.isScrollButtonVisible();
+    this.adjustScrollAfterKeyboardClose();
   }
 
   disconnect() {
+    document.removeEventListener("turbo:load", this.scrollToBottomHandler);
     window.removeEventListener("scroll", this.scrollHandler);
-    window.removeEventListener("turbo:load", this.scrollToBottomHandler);
   }
 
   scrollToEnd() {
@@ -27,10 +28,19 @@ export default class extends Controller {
   }
 
   isAtBottom() {
-    return window.innerHeight + window.scrollY >= document.body.scrollHeight - 200;
+    return (window.innerHeight + window.scrollY >= document.body.scrollHeight - 200);
   }
 
   isScrollButtonVisible() {
     this.scrollButtonTarget.hidden = this.isAtBottom();
+  }
+
+  adjustScrollAfterKeyboardClose() {
+    const textarea = this.element.querySelector("textarea");
+    if (!textarea) return;
+
+    textarea.addEventListener("focusout", () => {
+      setTimeout(() => { window.scrollBy(0, 1); window.scrollBy(0, -1); }, 100);
+    });
   }
 }
