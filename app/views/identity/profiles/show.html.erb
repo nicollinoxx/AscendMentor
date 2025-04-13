@@ -9,9 +9,16 @@
       <p class="py-2 px-3 mb-5 text-sm bg-red-50 dark:bg-white text-red-500 font-medium rounded-md inline-block" id="alert"><%= alert %></p>
   <% end %>
 
-  <h1 class="font-bold text-4xl mb-4">Profile</h1>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl mb-4">Profile</h1>
+    <div class="bg-indigo-100 rounded-md p-2 text-indigo-600">
+        <% if chat_exists? %>
+            <%= link_to 'Go to chat', chat_messages_path(@chat), class: 'font-medium'  %>
+        <% else %>
+            <%= button_to 'Send a message', create_chat_path(guest: @user.name), data: { turbo: false }, class: 'font-medium' %>
+        <% end %>
+    </div>
+  </div>
 
   <div><%= render partial: "identity/shared/profile" %></div>
-
-  <div><%= button_to 'Send a message', create_chat_path(guest: @user.name), data: { turbo: false }  %></div>
 </div>

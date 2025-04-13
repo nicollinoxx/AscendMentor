@@ -27,6 +27,7 @@ class Identity::TagsController < ApplicationController
         format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.turbo_stream
       end
     end
   end

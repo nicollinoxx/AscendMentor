@@ -1,1 +1,1 @@
-<%= turbo_stream.update("tag_#{@tag.id}", partial: "identity/shared/tag", locals: { tag: @tag }) %>
+<%= turbo_stream.replace("tag_#{@tag.id}", partial: "identity/shared/tag", locals: { tag: @tag }) %>

@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(@tag) do %>
     <%= form_with(model: @tag, url: identity_tag_path(@tag)) do |form| %>
-        <%= form.text_field :name, class: "text-black bg-white text-sm py-0.5 text-center rounded-md border border-gray-300 focus:outline-blue-600 dark:bg-slate-600" %>
+        <%= form.text_field :name, class: "dark:bg-white text-sm py-0.5 text-center rounded-md border border-gray-300 focus:outline-blue-600 dark:bg-slate-600" %>
         <%= form.submit "save", class: "rounded-md text-sm px-1 py-0.5 bg-blue-600 hover:bg-blue-500 text-white" %>
     <% end %>
 <% end %>
