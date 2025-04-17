@@ -15,8 +15,8 @@ class User < ApplicationRecord
 
   validates :name, :email_address, presence: true, uniqueness: true
 
-  scope :search_by_name_or_tag, -> (name) {
-    left_joins(:tags).where('users.name LIKE :name OR tags.name LIKE :name', name: "#{name}%")
+  scope :search_by_name_or_tag, ->(search_term) {
+    left_joins(:tags).where("users.name LIKE :term OR tags.name LIKE :term", term: "#{search_term}%")
     .distinct.order(:name)
   }
 end

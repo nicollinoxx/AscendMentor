@@ -13,7 +13,7 @@ class Chat < ApplicationRecord
       chat_keys = participants.map(&:chat_key)
 
       if Participant.exists?(chat_key: chat_keys)
-        errors.add(:base, 'Chat already exists')
+        errors.add(:base, "Chat already exists")
       end
     end
 end

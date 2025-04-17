@@ -1,0 +1,10 @@
+<%= turbo_stream.replace :next_page_container, partial: "chats/chat", collection: @page.records, as: :chat %>
+
+<% unless @page.last? %>
+    <%= turbo_stream.append :chat, partial: "chats/next_page_container", locals: { page: @page.next_param } %>
+<% end %>
+<%= turbo_stream.replace :next_page_container, partial: "chats/chat", locals: { chat: @chat }, collection: @page.records, as: :chat %>
+
+<% unless @page.last? %>
+  <%= turbo_stream.append :messages, partial: "layouts/next_page_container", locals: { page: @page.next_param } %>
+<% end %>

@@ -18,6 +18,6 @@ class Identity::ProfilesController < ApplicationController
     end
 
     def set_chat_key
-      [Current.user.id, @user.id].sort.join('-')
+      [ Current.user.id, @user.id ].sort.join("-")
     end
 end
