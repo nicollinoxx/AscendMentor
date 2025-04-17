@@ -14,7 +14,7 @@
     </div>
 
     <%= turbo_stream_from @chat %>
-    <div id="messages" data-chat-id="<%= @chat.id %>" class="flex flex-col-reverse mb-22 mt-15">
+    <div id="messages" data-chat-id="<%= @chat.id %>" class="flex flex-col-reverse mb-22 mt-18">
         <%= render partial: "messages/message", locals: { chat: @chat }, collection: @page.records, as: :message %>
         <%= render "layouts/next_page_container", src: chat_messages_path(chat: @chat, page: @page.next_param, format: :turbo_stream) unless @page.last? %>
     </div>
