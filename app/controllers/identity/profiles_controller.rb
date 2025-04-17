@@ -13,8 +13,8 @@ class Identity::ProfilesController < ApplicationController
   private
 
     def search_profiles
-      return User.order(:name) unless params[:name].present?
-      User.search_by_name_or_tag(params[:name])
+      return User.where.not(id: Current.user.id).order(:name) unless params[:name].present?
+      User.search_by_name_or_tag(params[:name]).where.not(id: Current.user.id)
     end
 
     def set_chat_key
